@@ -1,16 +1,28 @@
 import Head from 'next/head'
-import Image from 'next/image'
+
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import styled from 'styled-components'
 import cartIcon from 'public/Vector.svg'
-import { IProduct } from '@/interface/poroduct'
+import { IProduct } from '@/interface/product'
 import Card from '@/components/Card'
 import { GlobalStyle } from '@/styles/style'
 import Sidebar from '@/components/Sidebar'
-import { useDispatch } from 'react-redux'
-import { CloseSidebar, OpenSidebar } from '@/context/features/navbar'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { OpenSidebar } from '@/context/features/navbar'
+import {
+  Header,
+  TituloContainer,
+  Titulo,
+  SubTtitulo,
+  DivCart,
+  StyledImage,
+  CartItens,
+  Body,
+  CardContainer,
+  Footer,
+  TextoDoFooter
+} from './../styles/indexStyle'
+import { RootState } from '@/context/store'
 
 export default function Home() {
 
@@ -22,84 +34,9 @@ export default function Home() {
   }, [])
 
   const dispatch = useDispatch()
+  const CartItensArr = useSelector((state: RootState) => state.cart)
+  const CartItensCounter = useSelector((state: RootState) => state.cart.length)
 
-  const Footer = styled.footer`
-  background: #EEEEEE;
-  `
-  const TextoDoFooter = styled.h1`
-  font-size: 12px;
-  font-weight: 400;
-  text-align: center;
-  color: #000000;
-  `;
-
-  const Header = styled.nav`
-  background-color: #0F52BA;
-  width: 100%;
-  min-height: 100px;
-  padding-right: 88px;
-  padding-left: 65px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  `
-
-  const Titulo = styled.h1`
-  font-size: 40px;
-  font-weight: 600;
-  color: #FFFFFF;
-  `
-
-  const SubTtitulo = styled.h2`
-  font-size: 20px;
-  font-weight: 300;
-  position: relative;
-  bottom: 3px;
-  color: #FFFFFF;
-  `
-
-  const TituloContainer = styled.div`
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  `
-
-  const DivCart = styled.button` 
-  display: flex;
-  background-color: white;
-  width: 90px;
-  height: 45px;
-  gap: 1rem;
-  border-radius: 8px;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border: none;
-  `
-
-  const CartItens = styled.div` 
-  color: #000000;
-  font-weight: bold;
-  font-size: 16px;
-  `
-  const StyledImage = styled(Image)`
-    width: 19px;
-    height: 19px;
-  `
-
-  const Body = styled.main`
-  min-height: calc(100vh - 115px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  `
-
-  const CardContainer = styled.section`
-  display: grid;
-  column-gap: 31px;
-  row-gap: 31px;
-  grid-template-columns: repeat(4, 190px);
-  `
 
   return (
     <>
@@ -122,7 +59,7 @@ export default function Home() {
         </TituloContainer>
         <DivCart onClick={() => dispatch(OpenSidebar())} >
           <StyledImage src={cartIcon} alt='Carrinho' />
-          <CartItens> 0 </CartItens>
+          <CartItens> {CartItensCounter} </CartItens>
         </DivCart>
       </Header>
       <Body>

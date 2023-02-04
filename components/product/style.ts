@@ -38,12 +38,12 @@ export const ProductPrice = styled.p`
   font-weight: 700;
 `;
 
-export const QuantityHandleContainer = styled.p`
+export const QuantityHandleContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const QuantityHandleDisplay = styled.p`
+export const QuantityHandleDisplay = styled.div`
   display: flex;
   align-items: center;
   gap: 0.25rem;

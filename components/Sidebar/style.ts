@@ -1,18 +1,23 @@
 import styled from 'styled-components';
+interface SidebarContainerProps {
+  open: boolean;
+}
 
-export const SideBarConatiner = styled.section`
+export const SideBarConatiner = styled.section<SidebarContainerProps>`
   min-height: 100vh;
   background-color: #0f52ba;
   position: absolute;
   right: 0;
   box-shadow: -5px 0px 6px rgba(0, 0, 0, 0.13);
+  ${(props) =>
+    props.open
+      ? `
+    display: block
+    `
+      : `
+    display: none
+    `}
 `;
-
-// ${(Sidebar) => Sidebar ? `
-//     display: block
-//   ` : `
-//   display: none
-//   `}
 
 export const SideBarHeader = styled.div`
   display: flex;

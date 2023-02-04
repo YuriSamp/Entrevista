@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/context/store'
 import { decrement, increment } from '@/context/features/counter'
+import { CartDeleted } from '@/context/features/cart'
 import {
   IconExit,
   ProductDisplay,
@@ -16,18 +17,24 @@ import {
   Label,
 } from './style'
 
-function Product() {
+interface Props {
+  Name: string;
+  Price: string;
+  Photo: string;
+  Id: number;
+}
+
+function Product({ Name, Price, Photo, Id }: Props) {
 
   const count = useSelector((state: RootState) => state.counter.value)
   const dispatch = useDispatch()
 
   return (
     <ProductDisplay>
-      <IconExit>X</IconExit>
-      {/* <Image/> */}
+      <IconExit onClick={() => dispatch(CartDeleted(Id))} >X</IconExit>
+      <Image src={Photo} width={50} height={50} alt='' />
       <ProductName>
-        Apple
-        Homepod
+        {Name}
       </ProductName>
       <QuantityHandleContainer>
         <Label>Qtd:</Label>
@@ -39,7 +46,7 @@ function Product() {
           <QuantityHandleButton onClick={() => dispatch(increment())} > + </QuantityHandleButton>
         </QuantityHandleDisplay>
       </QuantityHandleContainer>
-      <ProductPrice>R$300</ProductPrice>
+      <ProductPrice>R${Math.trunc(Number(Price))}</ProductPrice>
     </ProductDisplay>
   )
 }

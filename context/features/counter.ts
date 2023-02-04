@@ -1,19 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { IProduct } from '@/interface/poroduct';
-
-// export const cartSlice = createSlice({
-//   name: 'cart',
-//   initialState: [],
-//   reducers: {
-//     CartAdd: (state, action: PayloadAction<IProduct[]>) => {
-//       state.push(action.payload);
-//     },
-//     CartDeleted: (state, action) => {
-//       return state.filter((todo: IProduct) => todo.id !== action.payload);
-//     },
-//   },
-// });
 
 const initialState = {
   value: 0,
